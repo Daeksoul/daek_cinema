@@ -32,12 +32,11 @@ function fadeAudio(el, fromVol, toVol, duration = 3000) {
   const start = performance.now();
   el.volume = Math.min(1, Math.max(0, fromVol));
   
-  // fire and forget the play promise to avoid unhandled rejections
+  // fire and forget - avoid unhandled rejections
   el.play().catch(() => { /* muted or not ready yet */ });
 
   function step(ts) {
     const t = Math.min((ts - start) / duration, 1);
-    // compute and clamp
     const raw = fromVol + (toVol - fromVol) * t;
     el.volume  = Math.min(1, Math.max(0, raw));
 
@@ -53,10 +52,10 @@ function fadeAudio(el, fromVol, toVol, duration = 3000) {
 }
 
   if (nowVisible) {
-    // fade in the “in” sting from 0 → soundInVolume
+    // fade the “in” cue from 0 -> soundInVolume
     fadeAudio(soundIn, 0, soundInVolume, 6000);
   } else {
-    // fade in “out” sting at full then fade to 0
+    // fade the “out” cue from soundOutVolume -> to 0
     fadeAudio(soundOut, soundOutVolume, 0, 6000);
   }
 });
