@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Full-screen NUI container */
+#nui-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Cinematic bars */
+.bar {
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  opacity: 0;
+  transform: translateY(var(--offscreen, -100%));
+  transition: opacity 2.5s ease-in-out,
+              transform 2.5s ease-in-out;
+  z-index: 999;
+}
+
+/* Off-screen vars */
+#topBar {
+  --offscreen: -100%;
+  top: 0;
+}
+
+#bottomBar {
+  --offscreen: 100%;
+  bottom: 0;
+}
+
+/* Visible state */
+#topBar.show,
+#bottomBar.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide native audio controls */
+#audio, audio {
+  display: none;
+}
